@@ -2,7 +2,7 @@
 
 Local WordPress hardening. This is the WordPress.org directory version: every feature works after activation. There is no account, license check, or remote service.
 
-Product site: https://wpprotectyoursite.com
+Product site: wpprotectyoursite.com (not linked until DNS resolves).
 
 ## Layout
 

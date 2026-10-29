@@ -106,7 +106,7 @@ class SafeMode {
         }
 
         $modules = array(
-            'xmlrpc'             => 'class-xmlrpc.php',
+            'xmlrpc'             => 'class-xml-rpc.php',
             'rest_api'           => 'class-rest-api.php',
             'user_enumeration'   => 'class-user-enumeration.php',
             'headers'            => 'class-headers.php',

@@ -4,7 +4,7 @@ Tags: security, hardening, login, xmlrpc, rest-api
 Requires at least: 5.8
 Tested up to: 7.1
 Requires PHP: 7.4
-Stable tag: 1.0.1
+Stable tag: 1.0.2
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -48,6 +48,10 @@ No. It does not send site data anywhere.
 
 == Changelog ==
 
+= 1.0.2 =
+* Fixed class loading so the plugin activates on a clean WordPress install.
+* Removed the plugin URL until the site is reachable.
+
 = 1.0.1 =
 * Directory release with local hardening only.
 * Fixed a fatal error during activation.
@@ -56,6 +60,9 @@ No. It does not send site data anywhere.
 * Initial release.
 
 == Upgrade Notice ==
+
+= 1.0.2 =
+Fixes activation on a clean WordPress install.
 
 = 1.0.1 =
 Fixes activation and keeps every included feature available without an account.

@@ -1,9 +1,8 @@
 <?php
 /**
  * Plugin Name: Kyvora
- * Plugin URI: https://wpprotectyoursite.com
  * Description: Harden WordPress with XML-RPC controls, login rate limiting, user-enumeration blocking, and security headers. Fully usable with no account.
- * Version: 1.0.1
+ * Version: 1.0.2
  * Author: Bray Leiton
  * License: GPL-2.0-or-later
  * License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -18,20 +17,31 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-define( 'WPPYS_VERSION', '1.0.1' );
+define( 'WPPYS_VERSION', '1.0.2' );
 define( 'WPPYS_FILE', __FILE__ );
 define( 'WPPYS_DIR', plugin_dir_path( __FILE__ ) );
 define( 'WPPYS_URL', plugin_dir_url( __FILE__ ) );
 
 spl_autoload_register(
 	function ( $class ) {
-		if ( 0 !== strpos( $class, 'WPProtectYourSite\\' ) ) {
+		$prefix = 'WPProtectYourSite\\';
+		if ( 0 !== strpos( $class, $prefix ) ) {
 			return;
 		}
-		$relative = str_replace( 'WPProtectYourSite\\', '', $class );
-		$file     = WPPYS_DIR . 'includes/' . str_replace( '\\', '/', $relative ) . '.php';
-		if ( file_exists( $file ) ) {
-			require_once $file;
+
+		$relative = substr( $class, strlen( $prefix ) );
+		$parts    = explode( '\\', $relative );
+		$name     = array_pop( $parts );
+		$name     = strtolower( preg_replace( '/(?<!^)[A-Z]/', '-$0', $name ) );
+		$dir      = $parts ? implode( '/', $parts ) . '/' : '';
+		$base     = WPPYS_DIR . 'includes/' . $dir;
+
+		foreach ( array( 'class-', 'interface-' ) as $kind ) {
+			$file = $base . $kind . $name . '.php';
+			if ( file_exists( $file ) ) {
+				require_once $file;
+				return;
+			}
 		}
 	}
 );
